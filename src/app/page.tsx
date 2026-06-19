@@ -1,65 +1,122 @@
-import Image from "next/image";
+import Navbar from "@/components/Navbar";
+import WaitlistForm from "@/components/WaitlistForm";
+import ProductPreview from "@/components/ProductPreview";
+import Benefits from "@/components/Benefits";
+import SocialProof from "@/components/SocialProof";
+import { Play, ShieldCheck, Zap, Heart, Video } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <div className="relative min-h-screen bg-[#050608] text-foreground flex flex-col font-sans selection:bg-accent/30 selection:text-white overflow-hidden">
+      
+      {/* Background Accent Gradients */}
+      <div className="absolute top-0 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[120px] pointer-events-none -z-10 animate-pulse"></div>
+      <div className="absolute top-[800px] right-1/4 w-[500px] h-[500px] bg-[#ff8533]/5 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+      
+      {/* Grid Pattern overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,92,0,0.015)_1.5px,transparent_1.5px),linear-gradient(90deg,rgba(255,92,0,0.015)_1.5px,transparent_1.5px)] bg-[size:40px_40px] pointer-events-none opacity-60 [mask-image:radial-gradient(ellipse_at_top,white_70%,transparent_100%)]"></div>
+
+      <Navbar />
+
+      {/* Hero Section */}
+      <main className="flex-grow">
+        <section className="relative pt-24 pb-20 lg:pt-36 lg:pb-32 px-4 sm:px-6 lg:px-8 border-b border-zinc-900">
+          <div className="mx-auto max-w-4xl text-center flex flex-col items-center">
+            
+            {/* Launching Soon Badge */}
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-zinc-900 border border-zinc-800 rounded-full text-xs font-semibold text-accent mb-6 animate-fade-in shadow-[0_0_15px_rgba(255,92,0,0.05)]">
+              <Play className="h-3 w-3 text-accent fill-accent animate-pulse" />
+              <span>Launching Soon</span>
+            </div>
+
+            {/* Headline */}
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-[1.1] max-w-3xl">
+              Turn one idea into a <span className="bg-gradient-to-r from-accent to-[#ff8533] bg-clip-text text-transparent text-glow">ready-to-post</span> short video
+            </h1>
+
+            {/* Subheadline */}
+            <p className="text-zinc-400 text-base sm:text-xl max-w-2xl mb-10 leading-relaxed font-normal">
+              VideoXO creates scripts, voiceovers, visuals, captions, and exports your video in one smooth AI workflow.
+            </p>
+
+            {/* Waitlist Form */}
+            <div className="w-full max-w-md mb-4">
+              <WaitlistForm buttonText="Join Waitlist" />
+            </div>
+
+            {/* Trust Text */}
+            <div className="flex items-center gap-2 text-xs text-zinc-500 font-medium mt-1">
+              <ShieldCheck className="h-4 w-4 text-emerald-500/80" />
+              <span>No spam. Early users get launch credits.</span>
+            </div>
+            
+          </div>
+        </section>
+
+        {/* Product Preview Card Section */}
+        <ProductPreview />
+
+        {/* Benefits Section */}
+        <Benefits />
+
+        {/* Social Proof Section */}
+        <SocialProof />
+
+        {/* Final CTA Section */}
+        <section id="waitlist-section" className="relative py-20 lg:py-28 px-4 sm:px-6 lg:px-8 border-b border-zinc-900 bg-zinc-950/20">
+          {/* Accent glow behind CTA card */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-accent/8 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+
+          <div className="mx-auto max-w-4xl text-center">
+            <div className="glass-panel rounded-3xl p-8 sm:p-12 max-w-3xl mx-auto shadow-2xl relative overflow-hidden">
+              {/* Corner decoration video logo */}
+              <div className="absolute top-4 right-4 text-accent/25">
+                <Video className="h-6 w-6" />
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+                Be first to try VideoXO
+              </h2>
+              <p className="text-zinc-400 text-sm sm:text-base max-w-md mx-auto mb-8 leading-relaxed">
+                Join the exclusive waitlist today. Get early access to the beta and free credits to create your first videos.
+              </p>
+
+              <div className="w-full max-w-md mx-auto mb-3">
+                <WaitlistForm buttonText="Get Early Access" />
+              </div>
+              
+              <span className="text-[10px] text-zinc-600 block mt-2">
+                Join 2,400+ creators and marketers already in line.
+              </span>
+            </div>
+          </div>
+        </section>
       </main>
+
+      {/* Footer Section */}
+      <footer className="py-12 px-4 sm:px-6 lg:px-8 bg-zinc-950/60 border-t border-white/5">
+        <div className="mx-auto max-w-7xl flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-zinc-500 font-medium">
+          <div className="flex items-center gap-2">
+            <div className="h-6 w-6 rounded bg-gradient-to-tr from-accent to-[#ff8533] flex items-center justify-center">
+              <Video className="h-3.5 w-3.5 text-white" />
+            </div>
+            <span className="font-bold text-white text-base">Video<span className="text-accent font-extrabold">XO</span></span>
+          </div>
+          
+          <div className="flex items-center gap-1 text-xs">
+            <span>© {new Date().getFullYear()} VideoXO. All rights reserved. Made with</span>
+            <Heart className="h-3 w-3 text-accent fill-accent" />
+            <span>for creators.</span>
+          </div>
+
+          <div className="flex items-center gap-6">
+            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <a href="mailto:hello@videoxo.ai" className="hover:text-white transition-colors">Contact</a>
+          </div>
+        </div>
+      </footer>
+
     </div>
   );
 }
