@@ -2,13 +2,13 @@ import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCNjB0x2WTuQoGbkEhjDXCvbH5FN_yBxvk",
-  authDomain: "wishlist-10714.firebaseapp.com",
-  projectId: "wishlist-10714",
-  storageBucket: "wishlist-10714.firebasestorage.app",
-  messagingSenderId: "607066180709",
-  appId: "1:607066180709:web:d6cc3cdf0873391dccca8c",
-  measurementId: "G-K46TV5LNXQ"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase (SSR friendly)
