@@ -1,10 +1,7 @@
 "use server";
 
-import fs from "fs/promises";
-import path from "path";
-
-const DATA_DIR = path.join(process.cwd(), "data");
-const WAITLIST_FILE = path.join(DATA_DIR, "waitlist.json");
+import { db } from "@/lib/firebase";
+import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 
 export async function joinWaitlist(email: string) {
   if (!email || typeof email !== "string" || !email.includes("@")) {
@@ -12,36 +9,26 @@ export async function joinWaitlist(email: string) {
   }
 
   try {
-    // Ensure the data directory exists
-    await fs.mkdir(DATA_DIR, { recursive: true });
-
-    let waitlist: { email: string; timestamp: string }[] = [];
-
-    try {
-      const fileContent = await fs.readFile(WAITLIST_FILE, "utf8");
-      waitlist = JSON.parse(fileContent);
-    } catch (error) {
-      // File doesn't exist or is invalid, start clean
-      waitlist = [];
-    }
-
     const cleanEmail = email.trim().toLowerCase();
-    const isDuplicate = waitlist.some((item) => item.email === cleanEmail);
 
-    if (isDuplicate) {
+    // Check if email already exists in Firestore waitlist collection
+    const waitlistRef = collection(db, "waitlist");
+    const q = query(waitlistRef, where("email", "==", cleanEmail));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
       return { success: true, message: "You're already on the list! We will notify you when we launch." };
     }
 
-    waitlist.push({
+    // Add new document to Firestore waitlist collection
+    await addDoc(waitlistRef, {
       email: cleanEmail,
       timestamp: new Date().toISOString(),
     });
 
-    await fs.writeFile(WAITLIST_FILE, JSON.stringify(waitlist, null, 2), "utf8");
-
     return { success: true, message: "Success! You've joined the VideoXO waitlist." };
   } catch (error) {
-    console.error("Waitlist error:", error);
+    console.error("Firestore Waitlist error:", error);
     return { success: false, message: "An error occurred. Please try again later." };
   }
 }
